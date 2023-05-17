@@ -15,12 +15,12 @@
 <body>
 
     <div id="app">
-        My friend <strong> {{ dude }} </strong>.
-        <br>
-        I like {{ dude }}
+<ul>
+    <li v-for="havo in characters">{{ havo }}</li>
+</ul>
 
         <form class="add-new">
-            <input type="text" v-model="dude">
+            <input type="text">
         </form>
     </div>
 
@@ -30,7 +30,10 @@
     const app = new Vue({
         el: '#app',
         data: {
-            dude: 'Aja the dog'
+            characters: [
+                'Mars the wolf',
+                'Aja the dog mature'
+            ]
         }
     })
 </script>
