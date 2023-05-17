@@ -16,10 +16,12 @@
 
     <div id="app">
 <ul>
-    <li v-for="havo in characters">{{ havo }}</li>
+    <li @click="counter++" v-for="havo in characters">{{ havo }}</li>
 </ul>
 
-        <form class="add-new">
+    <p>{{ counter }}</p>
+
+        <form class="add-new" @submit.prevent="add">
             <input type="text">
         </form>
     </div>
@@ -30,6 +32,7 @@
     const app = new Vue({
         el: '#app',
         data: {
+            counter: 0,
             characters: [
                 'Mars the wolf',
                 'Aja the dog mature'
