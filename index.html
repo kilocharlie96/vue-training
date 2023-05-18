@@ -16,7 +16,8 @@
 
     <div id="app">
 <ul>
-    <li v-for="havo in characters">
+    <li :class="{ strong: havo.split(' ').length > 3 }"
+        v-for="havo in characters">
         {{ havo }}
 
         <small v-if="havo.split(' ').length < 3">
