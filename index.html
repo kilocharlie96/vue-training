@@ -15,23 +15,25 @@
 <body>
 
     <div id="app">
-<ul>
-    <li :class="{ strong: havo.split(' ').length > 3 }"
-        v-for="havo in characters">
-        {{ havo }}
+    <ul>
+        <li class="dude" v-for="dude in characters">
+            <a class="ctrl" @click.prevent="remove(dude)">x</a>
 
-        <small v-if="havo.split(' ').length < 3">
-            <em>- lol, short name</em>
-        </small>
-    </li>
-</ul>
+            <article>
+                {{dude.who}}
+                <span>{{dude.wat}}</span>
+            </article>
+        </li>
+    </ul>
 
-        <form class="add-new" @submit.prevent="add">
-            <input type="text" v-model="newDude">
+        <form class="add-new" @keydown.enter="add">
+            <input type="text" v-model="newWho">
+            <input type="text" v-model="newWat">
         </form>
 
         <p class="preview">
-            {{ newDude }}
+            {{ newWho }}
+            <small>{{ newWat }}</small>
         </p>
 
     </div>
@@ -42,17 +44,25 @@
     const app = new Vue({
         el: '#app',
         data: {
-            newDude: '',
-            characters: [
-                'Mars the wolf',
-                'Aja the mature dog'
-            ]
+            newWho: '',
+            newWat: '',
+            characters: [{
+                "who": "Mars the wolf",
+                "wat": "Crazy hungry puppy"
+            }, {
+                "who": "Aja the dog",
+                "wat": "Lazy pupp"
+            }],
         },
         methods: {
             add() {
-                this.characters.push(
-                    this.newDude
-                )
+                this.characters.push({
+                    who: this.newWho,
+                    wat: this.newWat
+                })
+            },
+            remove(dude){
+                this.characters = this.characters.filter(item => item != dude)
             }
         }
     })
