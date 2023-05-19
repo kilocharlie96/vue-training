@@ -19,10 +19,13 @@
         <li class="dude" v-for="dude in characters">
             <a class="ctrl" @click.prevent="remove(dude)">x</a>
 
-            <article>
+            <article :class="{ faded: dude.cool < 10, gold: dude.cool > 50}">
                 {{dude.who}}
                 <span>{{dude.wat}}</span>
             </article>
+
+            <input class="ctrl" type="number" v-model.number="dude.cool">
+
         </li>
     </ul>
 
@@ -48,10 +51,12 @@
             newWat: '',
             characters: [{
                 "who": "Mars the wolf",
-                "wat": "Crazy hungry puppy"
+                "wat": "Crazy hungry puppy",
+                "cool": 12
             }, {
                 "who": "Aja the dog",
-                "wat": "Lazy pupp"
+                "wat": "Lazy pupp",
+                "cool": 42
             }],
         },
         methods: {
@@ -62,7 +67,7 @@
                 })
             },
             remove(dude){
-                this.characters = this.characters.filter(item => item != dude)
+                this.characters = this.characters.filter(item => item !== dude)
             }
         }
     })
